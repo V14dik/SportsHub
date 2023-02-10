@@ -1,0 +1,4 @@
+{
+    "DBUrl": "mongodb://localhost:27017/sportshub",
+    "port":8080
+}

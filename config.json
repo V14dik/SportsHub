@@ -1,4 +1,5 @@
 {
     "DBUrl": "mongodb://localhost:27017/sportshub",
-    "port":8080
+    "port":8080,
+    "jwtSecret": "secret"
 }

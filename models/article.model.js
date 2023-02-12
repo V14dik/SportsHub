@@ -1,12 +1,30 @@
 const mongoose = require("mongoose");
 
-const ArticleSchema = new mongoose.Schema({
-  name: String,
-  content: String,
-  categories: {
-    type: [String],
+const User = require("./user.model");
+
+const ArticleSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    categories: {
+      type: [String],
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: User,
+      required: true,
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Article = mongoose.model("Article", ArticleSchema);
 

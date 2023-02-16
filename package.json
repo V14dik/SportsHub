@@ -4,21 +4,31 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev-start": "nodemon npm app.js"
+    "server": "nodemon npm app.js",
+    "client": "cd client && yarn start",
+    "mern": "concurrently \"yarn server\" \"yarn client\""
   },
   "dependencies": {
+    "@mui/icons-material": "^5.11.0",
+    "@reduxjs/toolkit": "^1.9.2",
+    "axios": "^1.3.3",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "nodemon": "^2.0.20",
     "types": "^0.1.1"
   }

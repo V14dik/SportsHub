@@ -20,7 +20,7 @@ module.exports.register = async function register(req, res) {
     const doc = new User({
       username: req.body.username,
       email: req.body.email,
-      avatarUrl: req.body.avatarUrl,
+      avatarUrl: req.body.avatarUrl || "",
       passwordHash: passwordHash,
     });
 
@@ -35,7 +35,7 @@ module.exports.register = async function register(req, res) {
         expiresIn: "30d",
       }
     );
-    res.json(token);
+    res.json({ accessToken: token });
   } catch (err) {
     console.log(err);
   }

@@ -8,6 +8,7 @@ module.exports.addArticle = async function (req, res) {
       categories: req.body.newArticle.categories,
       user: req.userId,
     });
+    res.sendStatus(200);
     doc.save();
   } catch (err) {
     console.log(err);

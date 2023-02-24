@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import config from "../../config.json";
-import { USER_REGISTRATION_SUCCESS } from "./actionTypes";
+import { LOG_OUT, USER_REGISTRATION_SUCCESS } from "./actionTypes";
 
 export const userRegistration = (user) => {
   return async (dispatch) => {
@@ -18,5 +18,12 @@ export const userRegistrationSuccess = (accessToken) => {
     payload: {
       accessToken,
     },
+  };
+};
+
+export const logOut = () => {
+  localStorage.removeItem("accessToken");
+  return {
+    type: LOG_OUT,
   };
 };

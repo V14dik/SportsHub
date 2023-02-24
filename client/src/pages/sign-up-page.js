@@ -35,7 +35,7 @@ export const SingUp = () => {
         />
 
         <TextField
-          label="email"
+          label="Email"
           variant="outlined"
           fullWidth
           value={email}
@@ -45,7 +45,7 @@ export const SingUp = () => {
         />
 
         <TextField
-          label="password"
+          label="Password"
           type="password"
           variant="outlined"
           fullWidth

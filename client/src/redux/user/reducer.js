@@ -1,4 +1,4 @@
-import { USER_REGISTRATION_SUCCESS } from "./actionTypes";
+import { LOG_OUT, USER_REGISTRATION_SUCCESS } from "./actionTypes";
 
 const initialState = {
   accessToken: "",
@@ -10,7 +10,14 @@ export function userReducer(state = initialState, action) {
     case USER_REGISTRATION_SUCCESS:
       return {
         ...state,
+        isLogIn: true,
         accessToken: action.payload.accessToken,
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        isLogIn: false,
+        accessToken: "",
       };
     default:
       return state;

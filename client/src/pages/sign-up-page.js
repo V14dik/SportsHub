@@ -1,10 +1,10 @@
-import { TextField, Typography, Button, Box, Grid } from "@mui/material";
+import { TextField, Typography, Button, Box, Grid, Alert } from "@mui/material";
 import Container from "@mui/material/Container";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userRegistration } from "../redux/user/actions";
 
-export const SingUp = () => {
+export const SignUp = () => {
   const dispatch = useDispatch();
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");

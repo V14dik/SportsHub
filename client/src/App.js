@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { AddArticle } from "./pages/add-article-page";
+import { SignIn } from "./pages/sign-in-page";
 
-import { SingUp } from "./pages/sign-up-page";
+import { SignUp } from "./pages/sign-up-page";
 
 function App() {
   return (
@@ -10,9 +11,10 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/sign-up" element={<SingUp />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
           <Route path="/add-article" element={<AddArticle />} />
-          <Route path="/" element={<SingUp />} />
+          <Route path="/" element={<SignUp />} />
         </Routes>
       </main>
     </>

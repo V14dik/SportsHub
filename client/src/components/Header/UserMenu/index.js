@@ -64,10 +64,10 @@ export const UserMenu = () => {
             </MenuItem>
             <MenuItem
               component={Link}
-              to={"/log-in"}
+              to={"/sign-in"}
               onClick={handleCloseUserMenu}
             >
-              <Typography>Log in</Typography>
+              <Typography>Sign in</Typography>
             </MenuItem>
           </div>
         )}

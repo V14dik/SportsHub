@@ -19,7 +19,9 @@ app.get("/", (req, res) => {
   res.send("Main page");
 });
 
-app.post("/auth/user", UserController.register);
+app.post("/auth/registration", UserController.register);
+
+app.post("/auth/user", UserController.signIn);
 
 app.get("/users", UserController.getUsers);
 

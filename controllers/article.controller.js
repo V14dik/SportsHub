@@ -14,3 +14,12 @@ module.exports.addArticle = async function (req, res) {
     console.log(err);
   }
 };
+
+module.exports.getArticles = async function (req, res) {
+  try {
+    const articles = await Article.find();
+    res.json(articles);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};

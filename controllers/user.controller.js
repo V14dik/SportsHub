@@ -43,6 +43,11 @@ module.exports.register = async function register(req, res) {
 
     res.json({ accessToken: token });
   } catch (err) {
+    if (err.code === 11000) {
+      res.status(400).json({ message: "This email is already used" });
+    } else {
+      res.status(500).json({ message: "Server error" });
+    }
     console.log(err);
   }
 };

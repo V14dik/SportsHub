@@ -1,14 +1,26 @@
 import { TextField, Typography, Button, Box, Grid, Alert } from "@mui/material";
 import Container from "@mui/material/Container";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { userRegistration } from "../redux/user/actions";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isRegisterError, registerError, isLogIn } = useSelector(
+    ({ user }) => user
+  );
+
+  useEffect(() => {
+    if (isLogIn) {
+      navigate("/", { replace: true });
+    }
+  }, [isLogIn]);
+
   const registerHandler = () => {
     dispatch(userRegistration({ username, email, password }));
   };
@@ -23,7 +35,9 @@ export const SignUp = () => {
         }}
       >
         <Typography variant="h3">Sign Up</Typography>
-
+        {isRegisterError ? (
+          <Alert severity="error">{registerError}</Alert>
+        ) : null}
         <TextField
           label="Name"
           variant="outlined"

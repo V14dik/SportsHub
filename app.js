@@ -29,6 +29,8 @@ app.get("/users:id", UserController.getUser);
 
 app.post("/article", checkAuth, ArticleController.addArticle);
 
+app.get("/articles", ArticleController.getArticles);
+
 app.listen(config.port, async () => {
   try {
     await mongoose.connect(config.DBUrl);

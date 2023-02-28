@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { Articles } from "./components/Articles";
 import { Header } from "./components/Header";
 import { AddArticle } from "./pages/add-article-page";
 import { SignIn } from "./pages/sign-in-page";
@@ -14,7 +15,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/add-article" element={<AddArticle />} />
-          <Route path="/" element={<SignUp />} />
+          <Route path="/" element={<Articles />} />
         </Routes>
       </main>
     </>

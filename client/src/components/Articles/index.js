@@ -33,7 +33,13 @@ export const Articles = () => {
           ))}
         </>
       ) : (
-        <CircularProgress />
+        <CircularProgress
+          sx={{
+            position: "absolute",
+            bottom: "50%",
+            left: "50%",
+          }}
+        />
       )}
     </Container>
   );

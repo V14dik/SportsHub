@@ -1,4 +1,5 @@
 const Article = require("../models/article.model");
+const User = require("../models/user.model");
 
 module.exports.addArticle = async function (req, res) {
   try {
@@ -18,7 +19,16 @@ module.exports.addArticle = async function (req, res) {
 module.exports.getArticles = async function (req, res) {
   try {
     const articles = await Article.find();
-    res.json(articles);
+    const data = await Promise.all(
+      articles.map(async (article) => {
+        const user = await User.findById(article.user);
+        return {
+          ...article._doc,
+          userName: user.username,
+        };
+      })
+    );
+    res.json(data);
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }

@@ -21,7 +21,8 @@ const ArticleSchema = new mongoose.Schema(
       required: true,
     },
     comments: {
-      type: [CommentSchema],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+      default: [],
     },
   },
   {

@@ -1,5 +1,6 @@
 const Article = require("../models/article.model");
 const User = require("../models/user.model");
+const { addComment } = require("./comment.controller");
 
 module.exports.addArticle = async function (req, res) {
   try {
@@ -9,10 +10,46 @@ module.exports.addArticle = async function (req, res) {
       categories: req.body.newArticle.categories,
       user: req.userId,
     });
-    res.sendStatus(200);
     doc.save();
+    res.sendStatus(200);
   } catch (err) {
     console.log(err);
+  }
+};
+
+module.exports.deleteArticle = async function (req, res) {
+  try {
+    Article.deleteOne({
+      _id: req.body.articleId,
+    })
+      .then(function () {
+        res.sendStatus(200);
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.sendStatus(500);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports.addCommentToArticle = async function (req, res) {
+  try {
+    const newComment = await addComment({
+      content: req.body.content,
+      userId: req.userId,
+      article: req.body.articleId,
+    });
+
+    await Article.updateOne(
+      { _id: req.body.articleId },
+      { $push: { comments: newComment._id } }
+    );
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
   }
 };
 

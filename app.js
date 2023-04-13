@@ -7,6 +7,7 @@ const cors = require("cors");
 const config = require("./config.json");
 const UserController = require("./controllers/user.controller");
 const ArticleController = require("./controllers/article.controller");
+const CommentController = require("./controllers/comment.controller");
 const checkAuth = require("./middleware/checkAuth");
 
 app.use(cors());
@@ -30,6 +31,10 @@ app.get("/users:id", UserController.getUser);
 app.post("/article", checkAuth, ArticleController.addArticle);
 
 app.get("/articles", ArticleController.getArticles);
+
+app.delete("/article", ArticleController.deleteArticle);
+
+app.post("/comment", ArticleController.addCommentToArticle);
 
 app.listen(config.port, async () => {
   try {

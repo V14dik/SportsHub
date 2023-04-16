@@ -4,7 +4,7 @@ import { getDate } from "../../utils/getDate";
 
 export const Comment = ({ comment }) => {
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} sx={{ padding: "10px" }}>
       <Stack spacing={1}>
         <Stack direction="row">
           <Typography>{comment.user}</Typography>

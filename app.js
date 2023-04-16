@@ -36,7 +36,7 @@ app.get("/articles", ArticleController.getArticles);
 
 app.delete("/article", ArticleController.deleteArticle);
 
-app.post("/comment", ArticleController.addCommentToArticle);
+app.post("/comment", checkAuth, ArticleController.addCommentToArticle);
 
 app.listen(config.port, async () => {
   try {

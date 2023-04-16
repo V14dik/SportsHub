@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import config from "../config.json";
 import { useEffect, useState } from "react";
 import { Comment } from "../components/Comment";
+import { CommentForm } from "../components/CommentForm";
 
 export function ArticlePage() {
   const [article, setArticle] = useState();
@@ -58,10 +59,16 @@ export function ArticlePage() {
             ))}
           </Stack>
           <Typography paragraph={true}>{article.content}</Typography>
+          <Typography variant="h6" gutterBottom>
+            Comments:
+          </Typography>
+          <CommentForm articleId={article._id} />
           <Stack spacing={1}>
-            {article.comments.map((comment, index) => (
-              <Comment comment={comment} key={index} />
-            ))}
+            {article.comments
+              .map((comment, index) => (
+                <Comment comment={comment} key={index} />
+              ))
+              .reverse()}
           </Stack>
         </>
       ) : (

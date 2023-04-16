@@ -66,6 +66,7 @@ module.exports.signIn = async function signIn(req, res) {
         } else throw "error";
       })
       .catch((err) => {
+        console.log(err);
         res.status(400).json({ message: "Wrong email or password" });
       });
   } catch (err) {

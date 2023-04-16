@@ -1,4 +1,5 @@
 const { Comment } = require("../models/comment.model");
+const User = require("../models/user.model");
 
 module.exports.addComment = async function (comment) {
   try {
@@ -16,8 +17,10 @@ module.exports.addComment = async function (comment) {
 
 module.exports.getComment = async function (commentId) {
   try {
-    const doc = await Comment.findById(commentId);
-    return doc;
+    const comment = await Comment.findById(commentId);
+    const user = await User.findById(comment.user);
+    console.log(user);
+    return { ...comment._doc, user: user._doc };
   } catch (err) {
     console.log(err);
     throw new Error("Server error");

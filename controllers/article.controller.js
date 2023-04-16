@@ -67,7 +67,7 @@ module.exports.getArticle = async function (req, res) {
       article.comments.map(async (commentId) => {
         const comment = await getComment(commentId);
         return {
-          ...comment._doc,
+          ...comment,
         };
       })
     );

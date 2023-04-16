@@ -30,6 +30,8 @@ app.get("/users:id", UserController.getUser);
 
 app.post("/article", checkAuth, ArticleController.addArticle);
 
+app.get("/article/:articleId", ArticleController.getArticle);
+
 app.get("/articles", ArticleController.getArticles);
 
 app.delete("/article", ArticleController.deleteArticle);

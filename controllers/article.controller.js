@@ -1,6 +1,7 @@
+const { response } = require("express");
 const Article = require("../models/article.model");
 const User = require("../models/user.model");
-const { addComment } = require("./comment.controller");
+const { addComment, getComment } = require("./comment.controller");
 
 module.exports.addArticle = async function (req, res) {
   try {
@@ -47,6 +48,31 @@ module.exports.addCommentToArticle = async function (req, res) {
       { $push: { comments: newComment._id } }
     );
     res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+};
+
+module.exports.getArticle = async function (req, res) {
+  try {
+    const articleId = req.params.articleId;
+    const article = await Article.findOne({ _id: articleId }).catch(function (
+      err
+    ) {
+      res.sendStatus(404).json({ message: "Bad request" });
+      console.log(err);
+    });
+    const comments = await Promise.all(
+      article.comments.map(async (commentId) => {
+        const comment = await getComment(commentId);
+        return {
+          ...comment._doc,
+        };
+      })
+    );
+
+    res.json({ ...article._doc, comments });
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

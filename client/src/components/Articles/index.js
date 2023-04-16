@@ -14,11 +14,13 @@ export const Articles = () => {
   };
 
   useEffect(() => {
-    setArticles(getArticles);
+    getArticles();
+    //setArticles(getArticles);
   }, []);
 
   return (
     <Container
+      maxWidth="md"
       sx={{
         alignContent: "center",
         display: "flex",

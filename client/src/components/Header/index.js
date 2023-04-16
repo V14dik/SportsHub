@@ -41,6 +41,13 @@ export const Header = () => {
             >
               Add post
             </Button>
+            <Button
+              component={Link}
+              to="/events"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Events
+            </Button>
           </Box>
 
           <UserMenu />

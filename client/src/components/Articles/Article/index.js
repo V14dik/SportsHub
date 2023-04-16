@@ -1,25 +1,21 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+
+import { getDate } from "../../../utils/getDate";
 
 export const Article = ({ article }) => {
-  const dateOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
   return (
-    <Card>
+    <Card
+      component={Link}
+      to={`/article/${article._id}`}
+      sx={{ textDecoration: "none" }}
+    >
       <CardHeader
         title={article.name}
         subheader={
           <>
             <Typography>{article.userName}</Typography>
-            <Typography>
-              {new Date(article.createdAt).toLocaleDateString(
-                "en-US",
-                dateOptions
-              )}
-            </Typography>
+            <Typography>{getDate(article.createdAt)}</Typography>
           </>
         }
       />

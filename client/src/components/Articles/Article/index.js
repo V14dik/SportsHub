@@ -1,4 +1,10 @@
-import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 import { getDate } from "../../../utils/getDate";
@@ -11,17 +17,24 @@ export const Article = ({ article }) => {
       sx={{ textDecoration: "none" }}
     >
       <CardHeader
-        title={article.name}
+        title={
+          <Stack direction="row" justifyContent="space-between">
+            <Typography variant="h5">{article.name}</Typography>
+            <Typography sx={{ color: "rgba(0, 0, 0, 0.6)" }}>
+              {getDate(article.createdAt)}
+            </Typography>
+          </Stack>
+        }
+        //title={article.name}
         subheader={
-          <>
+          <Stack justifyContent={"space-between"} direction="row">
             <Typography>{article.userName}</Typography>
-            <Typography>{getDate(article.createdAt)}</Typography>
-          </>
+          </Stack>
         }
       />
 
       <CardContent>
-        <Typography>{article.content}</Typography>
+        <Typography noWrap>{article.content}</Typography>
       </CardContent>
     </Card>
   );

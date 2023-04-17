@@ -38,7 +38,7 @@ export function ArticlePage() {
     >
       {article ? (
         <>
-          <Typography variant="h4" align="center" gutterBottom={true}>
+          <Typography variant="h4" gutterBottom={true}>
             {article.name}
           </Typography>
           <Stack
@@ -58,7 +58,9 @@ export function ArticlePage() {
               />
             ))}
           </Stack>
-          <Typography paragraph={true}>{article.content}</Typography>
+          <Typography gutterBottom sx={{ whiteSpace: "pre-line" }}>
+            {article.content}
+          </Typography>
           <Typography variant="h6" gutterBottom>
             Comments:
           </Typography>

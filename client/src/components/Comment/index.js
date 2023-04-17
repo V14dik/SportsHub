@@ -6,7 +6,11 @@ export const Comment = ({ comment }) => {
   return (
     <Paper elevation={3} sx={{ padding: "10px" }}>
       <Stack spacing={1}>
-        <Stack direction="row" spacing={1}>
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ alignItems: "baseline", justifyContent: "space-between" }}
+        >
           <Typography>{comment.user.username}</Typography>
           <Typography
             variant="caption"

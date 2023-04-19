@@ -25,7 +25,6 @@ export const Article = ({ article }) => {
             </Typography>
           </Stack>
         }
-        //title={article.name}
         subheader={
           <Stack justifyContent={"space-between"} direction="row">
             <Typography>{article.userName}</Typography>

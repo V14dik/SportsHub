@@ -5,7 +5,7 @@ import config from "../../config.json";
 import { Article } from "./Article";
 
 export const Articles = () => {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState();
 
   const getArticles = async () => {
     const url = `${config.serverUrl}/articles/`;
@@ -28,7 +28,7 @@ export const Articles = () => {
         gap: "40px",
       }}
     >
-      {articles.length ? (
+      {articles ? (
         <>
           {articles.map((article) => (
             <Article article={article} key={article._id} />

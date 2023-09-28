@@ -1,10 +1,12 @@
 import { Button, Paper, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import config from "../../config.json";
 import axios from "axios";
 
 export const CommentForm = ({ articleId }) => {
+  const { isLogIn } = useSelector(({ user }) => user);
   const [content, setContent] = useState("");
   const addComment = async () => {
     const url = config.serverUrl + "/comment";
@@ -30,7 +32,6 @@ export const CommentForm = ({ articleId }) => {
         component={"form"}
         spacing={1}
         onSubmit={(e) => {
-          //e.preventDefault();
           addComment();
         }}
       >
@@ -45,6 +46,7 @@ export const CommentForm = ({ articleId }) => {
           color="primary"
           variant="contained"
           sx={{ width: "10%" }}
+          disabled={isLogIn ? false : true}
         >
           Send
         </Button>

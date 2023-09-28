@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const config = require("../config.json");
 
 const User = require("../models/user.model");
+const Article = require("../models/article.model");
+const Course = require("../models/course.model");
+const Event = require("../models/event.model");
 
 const generateToken = (id) => {
   const token = jwt.sign(
@@ -76,11 +79,74 @@ module.exports.signIn = async function signIn(req, res) {
 };
 
 module.exports.getUser = async function getUser(req, res) {
-  const user = await User.findById(req.body.userId);
-  res.json(user);
+  const userId = req.params.id;
+  let user = await User.findById(userId);
+  if (userId == req.userId) {
+    user = { ...user._doc, isUser: true };
+  } else {
+    user = { ...user._doc, isUser: false };
+  }
+  const subs = await User.where("subscriptions").in([userId]);
+  const isSub = subs.reduce((acc, cur) => {
+    return cur._id.valueOf() == req.userId || acc;
+  }, false);
+  user = { ...user, subsCount: subs.length, isSub: isSub };
+  const articles = await Article.find({ user: userId });
+  const courses = await Course.find({ author: userId });
+  const events = await Event.find({ user: userId });
+  res.json({ user, articles, courses, events });
 };
 
 module.exports.getUsers = async function getUsers(req, res) {
   const users = await User.find();
   res.json(users);
+};
+
+module.exports.getId = async function (req, res) {
+  res.json(req.userId);
+};
+
+module.exports.followUser = async function (req, res) {
+  try {
+    await User.findById(req.userId)
+      .where("subscriptions")
+      .nin([req.body.userId])
+      .updateOne({ $push: { subscriptions: req.body.userId } });
+    res.sendStatus(200);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports.unfollow = async function (req, res) {
+  try {
+    await User.findById(req.userId).updateOne({
+      $pull: { subscriptions: req.body.userId },
+    });
+    res.sendStatus(200);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports.getSubscriptions = async function (req, res) {
+  try {
+    const user = await User.findById(req.userId);
+    const articles = await Promise.all(
+      user.subscriptions.map(async (subId) => {
+        let subArticles = await Article.find({ user: subId });
+        const user = await User.findById(subId);
+        subArticles = subArticles.map((article) => {
+          return {
+            ...article._doc,
+            userName: user.username,
+          };
+        });
+        return subArticles;
+      })
+    );
+    res.json({ articles: articles.flat() });
+  } catch (e) {
+    console.log(e);
+  }
 };

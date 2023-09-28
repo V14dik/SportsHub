@@ -1,4 +1,3 @@
-const { response } = require("express");
 const Article = require("../models/article.model");
 const User = require("../models/user.model");
 const { addComment, getComment } = require("./comment.controller");
@@ -63,6 +62,7 @@ module.exports.getArticle = async function (req, res) {
       res.sendStatus(404).json({ message: "Bad request" });
       console.log(err);
     });
+    const user = await User.findById(article.user);
     const comments = await Promise.all(
       article.comments.map(async (commentId) => {
         const comment = await getComment(commentId);
@@ -72,7 +72,7 @@ module.exports.getArticle = async function (req, res) {
       })
     );
 
-    res.json({ ...article._doc, comments });
+    res.json({ ...article._doc, comments, username: user.username });
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
@@ -81,7 +81,7 @@ module.exports.getArticle = async function (req, res) {
 
 module.exports.getArticles = async function (req, res) {
   try {
-    const articles = await Article.find();
+    const articles = await Article.find().sort({ createdAt: "desc" });
     const data = await Promise.all(
       articles.map(async (article) => {
         const user = await User.findById(article.user);
@@ -94,5 +94,29 @@ module.exports.getArticles = async function (req, res) {
     res.json(data);
   } catch (err) {
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports.deleteArticle = async function (req, res) {
+  try {
+    const articleId = req.params.id;
+    await Article.deleteOne({ _id: articleId });
+    res.sendStatus(200);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports.updateArticle = async function (req, res) {
+  try {
+    const articleId = req.params.id;
+    console.log(articleId);
+    await Article.findOneAndUpdate(
+      { _id: articleId },
+      { ...req.body.newArticle }
+    );
+    res.sendStatus(200);
+  } catch (e) {
+    console.log(e);
   }
 };

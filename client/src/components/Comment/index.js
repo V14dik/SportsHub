@@ -1,6 +1,7 @@
 import { Paper, Stack, Typography } from "@mui/material";
 
 import { getDate } from "../../utils/getDate";
+import { ProfileLink } from "../ProfileLink";
 
 export const Comment = ({ comment }) => {
   return (
@@ -11,7 +12,9 @@ export const Comment = ({ comment }) => {
           spacing={1}
           sx={{ alignItems: "baseline", justifyContent: "space-between" }}
         >
-          <Typography>{comment.user.username}</Typography>
+          <ProfileLink userId={comment.user._id}>
+            {comment.user.username}
+          </ProfileLink>
           <Typography
             variant="caption"
             sx={{

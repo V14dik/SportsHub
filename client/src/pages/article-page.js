@@ -12,6 +12,7 @@ import config from "../config.json";
 import { useEffect, useState } from "react";
 import { Comment } from "../components/Comment";
 import { CommentForm } from "../components/CommentForm";
+import { ProfileLink } from "../components/ProfileLink";
 
 export function ArticlePage() {
   const [article, setArticle] = useState();
@@ -22,7 +23,6 @@ export function ArticlePage() {
     const url = `${config.serverUrl}/article/${articleId}`;
     const res = await axios.get(url);
     setArticle(res.data);
-    console.log(res.data);
   };
 
   useEffect(() => {
@@ -38,14 +38,14 @@ export function ArticlePage() {
     >
       {article ? (
         <>
-          <Typography variant="h4" gutterBottom={true}>
-            {article.name}
-          </Typography>
+          <Typography variant="h4">{article.name}</Typography>
+          <ProfileLink userId={article.user}>{article.username}</ProfileLink>
           <Stack
             direction="row"
             spacing={1}
             sx={{
-              mb: 2,
+              mb: 1,
+              mt: 2,
             }}
           >
             {article.categories.map((category, index) => (

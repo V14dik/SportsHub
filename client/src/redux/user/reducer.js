@@ -8,11 +8,13 @@ import {
 
 const initialState = {
   accessToken: "",
+  user: {},
   isLogIn: localStorage.getItem("accessToken") ? true : false,
   isRegisterError: false,
   registerError: "",
   isSignInError: false,
   signInError: "",
+  isTrainer: false,
 };
 
 export function userReducer(state = initialState, action) {
@@ -41,6 +43,7 @@ export function userReducer(state = initialState, action) {
         ...state,
         isLogIn: true,
         accessToken: action.payload.accessToken,
+        isTrainer: action.payload.isTrainer,
         isSignInError: false,
       };
     case SIGN_IN_ERROR:

@@ -14,7 +14,6 @@ export const Header = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -30,7 +29,7 @@ export const Header = () => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            SportsHub
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -47,6 +46,13 @@ export const Header = () => {
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Events
+            </Button>
+            <Button
+              component={Link}
+              to="/courses"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Courses
             </Button>
           </Box>
 

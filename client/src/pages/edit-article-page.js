@@ -1,28 +1,42 @@
 import { TextField, Typography, Box, Button } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import config from "../config.json";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const AddArticle = () => {
+export const EditArticle = () => {
   const { isLogIn } = useSelector(({ user }) => user);
   const [name, setName] = useState("");
   const [categories, setCategories] = useState([]);
   const [content, setContent] = useState("");
+
   const navigate = useNavigate();
 
-  const addArticleHandler = async () => {
-    const url = `${config.serverUrl}/article/`;
+  const articleId = useParams().id;
+
+  const getArticle = async () => {
+    const url = `${config.serverUrl}/article/${articleId}`;
+    const res = await axios.get(url);
+    setName(res.data.name);
+    setCategories(res.data.categories);
+    setContent(res.data.content);
+  };
+
+  useEffect(() => {
+    getArticle();
+  }, []);
+
+  const saveArticleHandler = async () => {
+    const url = `${config.serverUrl}/article/${articleId}`;
     const newArticle = {
       name: name,
       categories: categories,
       content: content,
     };
-    console.log(newArticle);
-    const res = await axios.post(
+    const res = await axios.patch(
       url,
       { newArticle },
       {
@@ -31,7 +45,7 @@ export const AddArticle = () => {
         },
       }
     );
-    console.log(res);
+    navigate("/");
   };
 
   return (
@@ -77,13 +91,10 @@ export const AddArticle = () => {
         />
         <Button
           variant="contained"
-          onClick={() => {
-            addArticleHandler();
-            navigate("/");
-          }}
+          onClick={saveArticleHandler}
           disabled={isLogIn ? false : true}
         >
-          Add Article
+          Save Article
         </Button>
       </Box>
     </Container>

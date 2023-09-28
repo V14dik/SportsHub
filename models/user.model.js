@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema(
     avatarUrl: {
       type: String,
     },
+    subscriptions: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true },
+    ],
   },
   {
     timestamps: true,

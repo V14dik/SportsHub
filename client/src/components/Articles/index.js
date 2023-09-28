@@ -10,12 +10,11 @@ export const Articles = () => {
   const getArticles = async () => {
     const url = `${config.serverUrl}/articles/`;
     const res = await axios.get(url);
-    setArticles(res.data.reverse());
+    setArticles(res.data);
   };
 
   useEffect(() => {
     getArticles();
-    //setArticles(getArticles);
   }, []);
 
   return (

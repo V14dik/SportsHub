@@ -1,16 +1,21 @@
-import { Container } from "@mui/material";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { Box, Button, Container, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Event } from "../components/Event";
+
+import { Clusterer, Placemark } from "@pbe/react-yandex-maps";
+import { Link } from "react-router-dom";
+
+import config from "../config.json";
+import { MMap } from "../components/Map";
 
 export const EventsPage = () => {
-  const [location, setLocation] = useState([51.505, -0.09]);
-
-  //[53.9007, 27.5709]
+  const [location, setLocation] = useState([53.9007, 27.5709]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     getLocation();
+    getEvents();
   }, []);
 
   const getLocation = async () => {
@@ -18,31 +23,56 @@ export const EventsPage = () => {
     setLocation([currLocation.data.latitude, currLocation.data.longitude]);
   };
 
-  function SetViewOnClick({ coords }) {
-    const map = useMap();
-    map.setView(coords);
-
-    return null;
-  }
+  const getEvents = async () => {
+    const res = await axios.get(config.serverUrl + "/event");
+    setEvents(res.data.reverse());
+  };
 
   return (
     <Container
       sx={{
+        display: "flex",
+        gap: "15px",
         alignContent: "center",
       }}
     >
-      <MapContainer
-        center={location}
-        zoom={11}
-        scrollWheelZoom={true}
-        style={{ width: "50%", height: "350px" }}
+      <Box sx={{ width: "55%" }}>
+        <Button
+          component={Link}
+          to={"/add-event"}
+          variant={"contained"}
+          sx={{ marginBottom: "10px" }}
+        >
+          New Event
+        </Button>
+        <div style={{ height: "658px", overflow: "auto" }}>
+          {events.length ? (
+            <Stack
+              spacing={2}
+              sx={{
+                padding: "3px",
+                overflow: "auto",
+              }}
+            >
+              {events.map((event, index) => (
+                <Event event={event} key={index} />
+              ))}
+            </Stack>
+          ) : null}
+        </div>
+      </Box>
+
+      <MMap
+        onClick={(e) => setLocation(e.get("coords"))}
+        defaultState={{ center: location, zoom: 11 }}
+        style={{ width: "65%", height: "350px" }}
       >
-        <TileLayer
-          url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <SetViewOnClick coords={location} />
-      </MapContainer>
+        <Clusterer>
+          {events.map((event, index) => (
+            <Placemark key={index} geometry={event.point} />
+          ))}
+        </Clusterer>
+      </MMap>
     </Container>
   );
 };

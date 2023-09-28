@@ -1738,6 +1738,29 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+"@mui/utils@^5.13.1":
+  version "5.13.1"
+  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.13.1.tgz#86199e46014215f95da046a5ec803f4a39c96eee"
+  integrity sha512-6lXdWwmlUbEU2jUI8blw38Kt+3ly7xkmV9ljzY4Q20WhsJMWiNry9CX8M+TaP/HbtuyR8XKsdMgQW7h7MM3n3A==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@types/prop-types" "^15.7.5"
+    "@types/react-is" "^18.2.0"
+    prop-types "^15.8.1"
+    react-is "^18.2.0"
+
+"@mui/x-date-pickers@^6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-6.6.0.tgz#3b921c3b1d24b1df1062b16e43921957063adf85"
+  integrity sha512-cF7Ijv0IgYi/tCQa2qdoCEHF5gtj/nn/gGdr3oOw/VI6QcKQkbLwA0baPfWEMS2weT9HR6JFerMQ5i57dWv+2A==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@mui/utils" "^5.13.1"
+    "@types/react-transition-group" "^4.4.6"
+    clsx "^1.2.1"
+    prop-types "^15.8.1"
+    react-transition-group "^4.4.5"
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz#dbf733a965ca47b1973177dc0bb6c889edcfb129"
@@ -1765,6 +1788,13 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@pbe/react-yandex-maps@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@pbe/react-yandex-maps/-/react-yandex-maps-1.2.4.tgz#fe3cbc43f018e73878be01c1cd2d8758ef1464b9"
+  integrity sha512-3VL5wd92cinLUnkOqbsk27lAEqKrJBP+XmmbZK3L9trwUYbO2U5n/dlJiqHplYQQb6MnZlnWwZA6h8ZBQ/FsWg==
+  dependencies:
+    "@types/yandex-maps" "2.1.29"
 
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.10"
@@ -2276,10 +2306,24 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-is@^18.2.0":
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-18.2.0.tgz#2f5137853a46017b3d56447940fb3eb92bbf24a5"
+  integrity sha512-1vz2yObaQkLL7YFe/pme2cpvDsCwI1WXIfL+5eLz0MI9gFG24Re16RzUsI8t9XZn9ZWvgLNDrJBmrqXJO7GNQQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-transition-group@^4.4.5":
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.5.tgz#aae20dcf773c5aa275d5b9f7cdbca638abc5e416"
   integrity sha512-juKD/eiSM3/xZYzjuzH6ZwpP+/lejltmiS3QEzV/vmb/Q8+HfDmxu+Baga8UEMGBqV88Nbg4l2hY/K2DkyaLLA==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-transition-group@^4.4.6":
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.6.tgz#18187bcda5281f8e10dfc48f0943e2fdf4f75e2e"
+  integrity sha512-VnCdSxfcm08KjsJVQcfBmhEQAPnLB8G08hAxn39azX1qYBQ/5RVQuoHuKIcfKOdncuaUvEpFKFzEvbtIMsfVew==
   dependencies:
     "@types/react" "*"
 
@@ -2364,6 +2408,11 @@
   integrity sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==
   dependencies:
     "@types/node" "*"
+
+"@types/yandex-maps@2.1.29":
+  version "2.1.29"
+  resolved "https://registry.yarnpkg.com/@types/yandex-maps/-/yandex-maps-2.1.29.tgz#88dba8d99a4a05c6bf6d7fbc36c78e891ef30d38"
+  integrity sha512-nuibRWj3RU/9KXlCzTrRtDE+n6V9l7NbT9JakicqZ5OXIdwyb6blvV2Uwn6lB58WYm3DSUDP2I2AWlnWMc8z2w==
 
 "@types/yargs-parser@*":
   version "21.0.0"
@@ -3757,6 +3806,13 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+date-fns@^2.30.0:
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz#f367e644839ff57894ec6ac480de40cae4b0f4d0"
+  integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
 
 debug@2.6.9, debug@^2.6.0:
   version "2.6.9"

@@ -69,12 +69,12 @@ export const SignUp = () => {
           }}
         />
         <Grid container>
-          <Grid item sm={4}>
+          {/* <Grid item sm={4}>
             <Button variant="outlined" component="label">
               Upload avatar
               <input type="file" hidden />
             </Button>
-          </Grid>
+          </Grid> */}
           <Grid item sm={4}>
             <Button variant="contained" onClick={registerHandler}>
               Sign up

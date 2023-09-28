@@ -10,11 +10,20 @@ module.exports = checkAuth = (req, res, next) => {
       const decoded = jwt.verify(token, config.jwtSecret);
 
       req.userId = decoded._id;
+
       next();
     } catch (err) {
-      return res.status(401).json({ message: "Unauthorized" });
+      if (req.params.isUser) {
+        next();
+      } else {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
     }
   } else {
-    res.status(401).json({ message: "Unauthorized" });
+    if (req.params.isUser) {
+      next();
+    } else {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
   }
 };
